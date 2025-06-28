@@ -7,17 +7,75 @@ const { Task, User } = require("../database");
 
 // GET all tasks
 router.get("/", async (req, res) => {
-  // Replace this with your code!
-  res.status(501).send("Not implemented");
+  const tasks = await Task.findAll();
+  res.json(tasks);
 });
 
 // GET a single task by id
+router.get("/:id", async (req, res) =>
+{
+  try
+  {
+  const id = Number(req.params.id);
+  const task = await Task.findByPk(req.params.id);
+  res.json(task);
+  }
+  catch(error)
+  {
+   res.status(501).json({message: "Server Error", error: error.message})
+  }
+}
+)
+
 
 // Patch a task by id
+router.patch("/:id", async (req, res) =>
+{
+  try
+  {
+    const id = Number(req.params.id);
+    const {task, complete} = req.body;
+    const updateTask = await Task.update(id, {task, complete});
+    res.json(updateTask)
+  }
+  catch(error)
+  {
+    res.status(501).json({message: "Server Error", error: error.message})
+  }
+}
+)
+
 
 // Delete a task by id
+router.delete("/:id", async (req, res) =>
+{
+  try
+  {
+  const id = Number(req.params.id);
+  const deleteTask = await Task.delete(id);
+  res.json(deleteTask)
+  }
+  catch(error)
+  {
+    res.status(501).json({message: "Server Error", error: error.message})
+  }
+
+}
+)
 
 // Create a new task
+router.post("/", async (req,res) =>
+{
+  try
+  {
+    const createTask = await Task.create(createTask);
+  }
+    catch(error)
+  {
+    res.status(501).json({message: "Server Error", error: error.message})
+  }
+}
+)
 
 module.exports = router;
 
