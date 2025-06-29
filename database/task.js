@@ -3,12 +3,6 @@ const db = require("./db");
 
 // TASK 1: Define the Task model here
 const Task = db.define("task", {
-  user_id:
-  {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
   title:
   {
     type: DataTypes.STRING,

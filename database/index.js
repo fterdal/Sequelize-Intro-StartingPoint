@@ -5,6 +5,8 @@ const User = require("./user");
 // TASK 3: Set up associations here
 // What kind of relationship is there between a user and a task?
 
+
+
 // Export everything needed
 module.exports = {
   db,

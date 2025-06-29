@@ -77,6 +77,16 @@ router.post("/", async (req,res) =>
 }
 )
 
+router.delete("/reset-table", async (req, res) => {
+  try {
+    await Task.sync({ force: true });
+    res.status(200).json({ message: "Task table dropped and recreated." });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to reset Task table", error: err.message });
+  }
+});
+
+
 module.exports = router;
 
 // TASK 5: Create a new routes file for users, and add as many routes as you see fit
